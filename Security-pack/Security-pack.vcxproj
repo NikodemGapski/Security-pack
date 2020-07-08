@@ -139,7 +139,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Security-pack.cpp" />
+    <ClCompile Include="src\Database.cpp" />
+    <ClCompile Include="src\Error.cpp" />
+    <ClCompile Include="src\Login.cpp" />
+    <ClCompile Include="src\MainController.cpp" />
+    <ClCompile Include="src\Math.cpp" />
+    <ClCompile Include="src\Security-pack.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Database.h" />
+    <ClInclude Include="src\Error.h" />
+    <ClInclude Include="src\Login.h" />
+    <ClInclude Include="src\MainController.h" />
+    <ClInclude Include="src\Math.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
