@@ -1,34 +1,37 @@
 #include <iostream>
-#include <vector>
 #include "Database.h"
+#include "Error.h"
+#include "DatabaseConnection.h"
 
-std::vector<std::string> Database::logins;
-std::vector<int> Database::h_passwords;
 
-bool Database::ExistsLogin(std::string l) {
-	for (int i = 0; i < logins.size(); i++) {
-		if (l == logins[i]) {
-			return true;
-		}
+
+const char* Database::dir = "./database/users.db";
+DBConnect::User Database::currentUser;
+
+int Database::ExistsUser(std::string l, int hash) {
+	DBConnect::User user;
+	DBConnect::selectRow(dir, l, user);
+
+
+	if (user.getLogin() != l) {
+		return -1;
 	}
-	return false;
+	if (user.getH_Password() != hash) {
+		return 0;
+	}
+
+	currentUser = user;
+	return 1;
 }
 
-bool Database::ExistsPassword(int hash) {
-	for (int i = 0; i < h_passwords.size(); i++) {
-		if (hash == h_passwords[i]) {
-			return true;
-		}
-	}
-	return false;
-}
 
 void Database::Upload() {
-	logins.clear();
-	h_passwords.clear();
+	// creates a database and a table if they don't exist
+	DBConnect::createDB(dir);
+	DBConnect::createTable(dir);
 
+	// some stupid stuff (debugging)
+	DBConnect::User user1("marc", 0);
+	DBConnect::insertRow(dir, user1);
 
-	// here it does some stupid stuff ( Hash("this")=0 ), TODO: upload data from .sql files in the database folder
-	logins.push_back("myLogin");
-	h_passwords.push_back(0);
 }

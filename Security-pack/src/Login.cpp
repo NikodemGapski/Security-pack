@@ -20,19 +20,19 @@ bool Login::Run() {
 
 	int hash; // hashed password
 	hash = Hash(password);
-	std::cout << "(debugging tool) hash = " << hash << std::endl;
 
-	if (Database::ExistsLogin(login)) {
-		if (Database::ExistsPassword(hash)) {
-			std::cout << "Logged in!" << std::endl;
-			error = false;
-		}
-		else {
-			std::cout << "There is no matching password in the database" << std::endl;
-			error = true;
-		}
+	int existsUser = Database::ExistsUser(login, hash);
+
+	if (existsUser == 1) { // the user exists
+		std::cout << "Logged in!" << std::endl;
+		std::cout << "Hi " << Database::currentUser.getLogin() << "!" << std::endl;
+		error = false;
 	}
-	else {
+	else if(existsUser == 0) { // the password is wrong but the login exists
+		std::cout << "There is no matching password in the database" << std::endl;
+		error = true;
+	}
+	else { // there is no such login
 		std::cout << "There is no user with login " << login << std::endl;
 		error = true;
 	}

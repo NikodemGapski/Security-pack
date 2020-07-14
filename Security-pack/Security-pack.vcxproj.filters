@@ -33,6 +33,12 @@
     <ClCompile Include="src\Error.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\DatabaseConnection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sqlite3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\MainController.h">
@@ -50,5 +56,11 @@
     <ClInclude Include="src\Error.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\DatabaseConnection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\packages.config" />
   </ItemGroup>
 </Project>

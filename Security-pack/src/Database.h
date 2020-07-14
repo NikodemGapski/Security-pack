@@ -1,13 +1,13 @@
 #pragma once
 #include <iostream>
-#include <vector>
+#include "DatabaseConnection.h"
 
 class Database {
 private:
-	static std::vector<std::string> logins; // logins in the database
-	static std::vector<int> h_passwords; // hashed passwords in the database
+	static const char* dir; // users database directory
 public:
-	static bool ExistsLogin(std::string l); // returns true if l is found in logins
-	static bool ExistsPassword(int hash); // returns true if hash is found in h_passwords
+	static DBConnect::User currentUser; // current user's data
+	static int ExistsUser(std::string l, int hash); // returns 1 if a user is found in the database,
+													//0 if the password is wrong and -1 if the login is wrong
 	static void Upload(); // uploads all logins and h_passwords from the database (currently just creates them with predefined data)
 };
