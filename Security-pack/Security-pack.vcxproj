@@ -139,6 +139,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Register.cpp" />
+    <ClCompile Include="src\Hash.cpp" />
     <ClCompile Include="src\sqlite3.c" />
     <ClCompile Include="src\DatabaseConnection.cpp" />
     <ClCompile Include="src\Database.cpp" />
@@ -149,6 +151,8 @@
     <ClCompile Include="src\Security-pack.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Register.h" />
+    <ClInclude Include="src\Hash.h" />
     <ClInclude Include="src\DatabaseConnection.h" />
     <ClInclude Include="src\Database.h" />
     <ClInclude Include="src\Error.h" />

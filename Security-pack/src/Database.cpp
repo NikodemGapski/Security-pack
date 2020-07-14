@@ -13,7 +13,7 @@ int Database::ExistsUser(std::string l, int hash) {
 	DBConnect::selectRow(dir, l, user);
 
 
-	if (user.getLogin() != l) {
+	if (user.getLogin() != l && user.getLogin().size() <= 0) {
 		return -1;
 	}
 	if (user.getH_Password() != hash) {
@@ -24,6 +24,11 @@ int Database::ExistsUser(std::string l, int hash) {
 	return 1;
 }
 
+void Database::AddUser(std::string l, int hash) {
+	DBConnect::User user(l, hash);
+	DBConnect::insertRow(dir, user);
+}
+
 
 void Database::Upload() {
 	// creates a database and a table if they don't exist
@@ -31,7 +36,7 @@ void Database::Upload() {
 	DBConnect::createTable(dir);
 
 	// some stupid stuff (debugging)
-	DBConnect::User user1("marc", 0);
-	DBConnect::insertRow(dir, user1);
+	//DBConnect::User user1("marc", 0);
+	//DBConnect::insertRow(dir, user1);
 
 }

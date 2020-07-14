@@ -2,7 +2,7 @@
 
 class MainController {
 private:
-	static int ViewWelcomeMenu();
+	static std::string ViewWelcomeMenu();
 public:
 	static void Run(); // runs the whole program
 };

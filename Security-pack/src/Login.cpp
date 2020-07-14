@@ -1,15 +1,8 @@
 #include <iostream>
 #include "Login.h"
-#include "Math.h"
+#include "Hash.h"
 #include "Database.h"
 
-int Login::n;
-int Login::e;
-
-Login::Login() {
-	n = 1000000000;
-	e = 13;
-}
 
 bool Login::Run() {
 	std::string login;
@@ -19,7 +12,7 @@ bool Login::Run() {
 	Input(login, password);
 
 	int hash; // hashed password
-	hash = Hash(password);
+	hash = Hash::HashPassword(password);
 
 	int existsUser = Database::ExistsUser(login, hash);
 
@@ -46,13 +39,4 @@ void Login::Input(std::string &login, std::string &password) {
 	std::cout << "password: " << std::endl;
 	std::cin >> password;
 	std::cout << std::endl;
-}
-
-int Login::Hash(std::string password) {
-	int hash = 0;
-	for (int i = 0; i < password.size(); i++) {
-		hash += password[i]; // add the next character ASCII value to the hash
-		hash = Math::Power(hash, e, n); // raise 'hash' to the power 'e' modulo 'n'
-	}
-	return hash;
 }

@@ -1,6 +1,4 @@
-﻿  Database.cpp
-  DatabaseConnection.cpp
-  Login.cpp
-C:\Users\BiN\source\repos\Security-pack\Security-pack\src\Login.cpp(53,20): warning C4018: '<': signed/unsigned mismatch
+﻿  MainController.cpp
+  Security-pack.cpp
   Generating Code...
   Security-pack.vcxproj -> C:\Users\BiN\source\repos\Security-pack\Debug\Security-pack.exe

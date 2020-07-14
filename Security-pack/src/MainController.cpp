@@ -1,26 +1,29 @@
 #include <iostream>
 #include "MainController.h"
 #include "Login.h"
+#include "Register.h"
 #include "Database.h"
 #include "Error.h"
 
 void MainController::Run() {
 	bool error = false;
-	int choice;
+	std::string choice;
 
 	do {
 		Database::Upload();
 		choice = ViewWelcomeMenu();
-		if (choice == 0) {
-			Login::Login();
+		if (choice == "0") {
 			error = Login::Run();
+		}
+		else if (choice == "1") {
+			error = Register::Run();
 		}
 	} while (error == true);
 
 }
 
-int MainController::ViewWelcomeMenu() {
-	int choice;
+std::string MainController::ViewWelcomeMenu() {
+	std::string choice;
 	bool isOK;
 	do {
 		system("cls");
@@ -29,9 +32,10 @@ int MainController::ViewWelcomeMenu() {
 		std::cout << "1 - don't have an account? Register" << std::endl;
 
 		std::cin >> choice;
+
 		isOK = true;
 
-		if (choice != 0 && choice != 1) {
+		if (choice != "0" && choice != "1") {
 			Error::Write("MainController::ViewWelcomeMenu", Error::Type::index);
 			isOK = false;
 		}
