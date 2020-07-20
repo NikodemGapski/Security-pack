@@ -34,7 +34,6 @@ bool Register::Run() {
 			error = false;
 		}
 	}
-	system("pause");
 	return error;
 }
 

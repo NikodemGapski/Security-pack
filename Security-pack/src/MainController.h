@@ -2,7 +2,9 @@
 
 class MainController {
 private:
-	static std::string ViewWelcomeMenu();
+	static bool isLoggedIn;
+	static void setLoggedIn(bool isLogged);
 public:
 	static void Run(); // runs the whole program
+	static bool getLoggedIn();
 };

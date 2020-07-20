@@ -7,7 +7,7 @@
 bool Login::Run() {
 	std::string login;
 	std::string password;
-	bool error;
+	bool loggedIn;
 
 	Input(login, password);
 
@@ -19,19 +19,25 @@ bool Login::Run() {
 	if (existsUser == 1) { // the user exists
 		std::cout << "Logged in!" << std::endl;
 		std::cout << "Hi " << Database::currentUser.getLogin() << "!" << std::endl;
-		error = false;
+		loggedIn = true;
 	}
 	else if(existsUser == 0) { // the password is wrong but the login exists
 		std::cout << "There is no matching password in the database" << std::endl;
-		error = true;
+		loggedIn = false;
 	}
 	else { // there is no such login
 		std::cout << "There is no user with login " << login << std::endl;
-		error = true;
+		loggedIn = false;
 	}
-	system("pause");
-	return error;
+	return loggedIn;
 }
+
+void Login::LogOut() {
+	Database::currentUser = DBConnect::User(); // remove the data stored in Database class about the current user
+
+	std::cout << std::endl << "Logged out!" << std::endl;
+}
+
 
 void Login::Input(std::string &login, std::string &password) {
 	std::cout << "login: " << std::endl;

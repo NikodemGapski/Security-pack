@@ -4,43 +4,69 @@
 #include "Register.h"
 #include "Database.h"
 #include "Error.h"
+#include "UI.h"
+
+
+bool MainController::isLoggedIn;
 
 void MainController::Run() {
-	bool error = false;
+	bool error;
+	bool loggedIn;
 	std::string choice;
 
-	do {
-		Database::Upload();
-		choice = ViewWelcomeMenu();
-		if (choice == "0") {
-			error = Login::Run();
-		}
-		else if (choice == "1") {
-			error = Register::Run();
-		}
-	} while (error == true);
+	while(true) {
+		// welcome screen
+		do {
+			error = false;
+			loggedIn = false;
+			Database::Upload();
+			choice = UI::WelcomeMenu();
 
+			if (choice == "0") {
+				// log in
+				loggedIn = Login::Run();
+			}
+			else if (choice == "1") {
+				// register
+				error = Register::Run();
+			}
+			else if (choice == "2") {
+				// exit
+				return;
+			}
+			system("pause");
+
+		} while (error == true || loggedIn == false);
+
+		if (loggedIn == true) {
+			// no error, logged in
+			setLoggedIn(true);
+		}
+
+		// logged in screen
+		while (getLoggedIn() == true) {
+			choice = UI::MainMenu();
+
+			if (choice == "0") {
+				// check inbox
+			}
+			else if (choice == "1") {
+				// send a message
+			}
+			else if (choice == "2") {
+				// log out
+				Login::LogOut();
+				setLoggedIn(false);
+			}
+			system("pause");
+		}
+	}
 }
 
-std::string MainController::ViewWelcomeMenu() {
-	std::string choice;
-	bool isOK;
-	do {
-		system("cls");
-		std::cout << "Security-pack by Nikodem Gapski" << std::endl;
-		std::cout << "0 - log in" << std::endl;
-		std::cout << "1 - don't have an account? Register" << std::endl;
+bool MainController::getLoggedIn() {
+	return isLoggedIn;
+}
 
-		std::cin >> choice;
-
-		isOK = true;
-
-		if (choice != "0" && choice != "1") {
-			Error::Write("MainController::ViewWelcomeMenu", Error::Type::index);
-			isOK = false;
-		}
-	} while (isOK == false);
-	system("cls");
-
-	return choice;
+void MainController::setLoggedIn(bool isLogged) {
+	isLoggedIn = isLogged;
 }

@@ -149,6 +149,7 @@
     <ClCompile Include="src\MainController.cpp" />
     <ClCompile Include="src\Math.cpp" />
     <ClCompile Include="src\Security-pack.cpp" />
+    <ClCompile Include="src\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Register.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="src\Login.h" />
     <ClInclude Include="src\MainController.h" />
     <ClInclude Include="src\Math.h" />
+    <ClInclude Include="src\UI.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\packages.config" />

@@ -6,7 +6,7 @@
 
 
 namespace DBConnect {
-	std::string User::getLogin() {
+	std::string DBConnect::User::getLogin() {
 		return login;
 	}
 	int User::getH_Password() {
