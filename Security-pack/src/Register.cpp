@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Hash.h"
+#include "Math.h"
 #include "Database.h"
 #include "Register.h"
 
@@ -30,7 +31,11 @@ bool Register::Run() {
 			error = true;
 		}
 		else { // everything is OK
-			Database::AddUser(login, hash);
+			// create RSA values
+			_int64 publicKey, n, privateKey;
+			Math::InitRSA(n, publicKey, privateKey);
+			// addd the user to the database
+			Database::AddUser(login, hash, publicKey, n, privateKey);
 			error = false;
 		}
 	}

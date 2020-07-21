@@ -5,6 +5,7 @@
 #include "Database.h"
 #include "Error.h"
 #include "UI.h"
+#include "Message.h"
 
 
 bool MainController::isLoggedIn;
@@ -45,13 +46,21 @@ void MainController::Run() {
 
 		// logged in screen
 		while (getLoggedIn() == true) {
+			system("cls");
 			choice = UI::MainMenu();
 
 			if (choice == "0") {
 				// check inbox
+				Database::UploadMessages();
+				UI::MessageMenu();
 			}
 			else if (choice == "1") {
 				// send a message
+				Message message;
+				bool sending = message.Create();
+				if (sending == true) {
+					Database::SendMessage(message);
+				}
 			}
 			else if (choice == "2") {
 				// log out

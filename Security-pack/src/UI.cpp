@@ -1,6 +1,8 @@
 #include <iostream>
+#include <string>
 #include "Error.h"
 #include "Database.h"
+#include "Math.h"
 #include "UI.h"
 
 std::string UI::WelcomeMenu() {
@@ -48,4 +50,43 @@ std::string UI::MainMenu() {
 	} while (isOK == false);
 
 	return choice;
+}
+
+void UI::MessageMenu() {
+	std::string choice;
+	bool isOK;
+
+	while (true) {
+		do {
+			system("cls");
+			std::cout << "Your inbox:" << std::endl;
+			for (int i = 0; i < Database::currentUser.inbox.size(); i++) {
+				std::cout << i << ". " << Database::DecryptTopic(Database::currentUser.inbox[i]) << std::endl;
+			}
+			std::cout << std::endl;
+			std::cout << "Choose which message you want to see: (to go back write no)" << std::endl;
+
+			std::cin >> choice;
+			if (choice == "no") {
+				return;
+			}
+
+			isOK = true;
+
+			if (Math::IsNumber(choice) == false) {
+				Error::Write("UI::MessageMenu", Error::Type::index);
+				isOK = false;
+			}
+			else if (std::stoi(choice) < 0 || std::stoi(choice) >= Database::currentUser.inbox.size()) {
+				Error::Write("UI::MessageMenu", Error::Type::index);
+				isOK = false;
+			}
+		} while (isOK == false);
+
+		system("cls");
+		int c = std::stoi(choice);
+		Database::DisplayMessage(Database::currentUser.inbox[c]);
+		system("pause");
+	}
+
 }

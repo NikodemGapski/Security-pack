@@ -16,10 +16,15 @@ bool Login::Run() {
 
 	int existsUser = Database::ExistsUser(login, hash);
 
-	if (existsUser == 1) { // the user exists
-		std::cout << "Logged in!" << std::endl;
-		std::cout << "Hi " << Database::currentUser.getLogin() << "!" << std::endl;
-		loggedIn = true;
+	if (existsUser == 1) { // the user exists in users.db
+		if (Database::ExistsKey() == true) { // the user has their private key in the privateKeys.db database
+			std::cout << "Logged in!" << std::endl;
+			std::cout << "Hi " << Database::currentUser.getLogin() << "!" << std::endl;
+			loggedIn = true;
+		}
+		else { // no matching private key for the user
+			loggedIn = false;
+		}
 	}
 	else if(existsUser == 0) { // the password is wrong but the login exists
 		std::cout << "There is no matching password in the database" << std::endl;

@@ -152,19 +152,21 @@ namespace Math {
         }
     }
 
-    void InitRSA(_int64 &n, _int64 &phi, _int64 &publicKey, _int64 &privateKey, _int64 modulo, int min) {
+    void InitRSA(_int64 &n, _int64 &publicKey, _int64 &privateKey, _int64 modulo, int min) {
         _int64 p, q;
         p = FindBigPrime(modulo);
         q = FindBigPrime(modulo);
         n = p * q;
-        phi = (p - 1) * (q - 1);
+        _int64 phi = (p - 1) * (q - 1);
 
         publicKey = FindCoprime(phi, min, modulo);
         privateKey = InverseModulo(publicKey, phi);
-        std::cout << publicKey << " " << privateKey << " " << n << std::endl;
     }
 
     void Repair(int &c) { // local function used in StringToData
+        if (c == -21) {
+            c = 99; // c = '\n'
+        }
         if (c < 0 || c >= 100) {
             c = '?';
         }
@@ -191,9 +193,9 @@ namespace Math {
 
             output += c;
         }
-        int remainder = 3 - (text.size() % 3);
+        int remainder = text.size() % 3;
         for (int i = 0; i < remainder; i++) {
-            output += "00";
+            output += "01"; // SPACE
         }
         output += "-";
         return output;
@@ -207,7 +209,13 @@ namespace Math {
                 piece += data[i + 1];
                 int character = std::stoi(piece);
                 character += 31; // SPACE was equal to 1
-                char c = character;
+                char c;
+                if (character == 130) {
+                    c = '\n';
+                }
+                else {
+                    c = character;
+                }
 
                 output += c;
                 i++;
@@ -232,14 +240,21 @@ namespace Math {
             else {
                 number /= 10; // one time more in the if statement (at the end)
                 _int64 _number = Power(number, key, modulo);
-                std::cout << "-" << _number;
                 std::string piece = std::to_string(_number);
                 output += piece;
                 output += '-';
                 number = 0;
             }
         }
-        std::cout << std::endl;
         return output;
+    }
+
+    bool IsNumber(std::string n) {
+        for (int i = 0; i < n.size(); i++) {
+            if (n[i] < 48 || n[i] > 57) {
+                return false;
+            }
+        }
+        return true;
     }
 }
