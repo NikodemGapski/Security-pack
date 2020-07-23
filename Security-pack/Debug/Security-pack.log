@@ -1,2 +1,10 @@
-﻿  Message.cpp
+﻿  Math.cpp
+C:\Users\BiN\source\repos\Security-pack\Security-pack\src\Math.cpp(162,43): warning C4244: 'argument': conversion from '__int64' to 'int', possible loss of data
+C:\Users\BiN\source\repos\Security-pack\Security-pack\src\Math.cpp(163,36): warning C4244: 'argument': conversion from '__int64' to 'int', possible loss of data
+C:\Users\BiN\source\repos\Security-pack\Security-pack\src\Math.cpp(252,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\BiN\source\repos\Security-pack\Security-pack\src\Math.cpp(273,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\BiN\source\repos\Security-pack\Security-pack\src\Math.cpp(277,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\BiN\source\repos\Security-pack\Security-pack\src\Math.cpp(278,48): warning C4018: '<': signed/unsigned mismatch
+C:\Users\BiN\source\repos\Security-pack\Security-pack\src\Math.cpp(296,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\BiN\source\repos\Security-pack\Security-pack\src\Math.cpp(316,27): warning C4018: '<': signed/unsigned mismatch
   Security-pack.vcxproj -> C:\Users\BiN\source\repos\Security-pack\Debug\Security-pack.exe

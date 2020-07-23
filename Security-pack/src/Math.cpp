@@ -163,65 +163,128 @@ namespace Math {
         privateKey = InverseModulo(publicKey, phi);
     }
 
-    void Repair(int &c) { // local function used in StringToData
-        if (c == -21) {
-            c = 99; // c = '\n'
+    int characterBase = 127 + 9 + 1; // base of number system in which characters are defined (ASCII + Polish characters + 1)
+    int Repair(char c) {
+        if (c == '\245') { // ¹
+            return 128;
         }
-        if (c < 0 || c >= 100) {
-            c = '?';
+        if (c == '\206') { // æ
+            return 129;
         }
-    }
-    void Repair(std::string &c) { // local function used in StringToData
-        if (c.size() == 1) {
-            c = '0' + c;
+        if (c == '\251') { // ê
+            return 130;
         }
-        if (c.size() > 2) { // no idea how this could happen
-            c.resize(2);
+        if (c == '\210') { // ³
+            return 131;
         }
-    }
-    std::string StringToData(std::string text) {
-        std::string output = "";
-        for (int i = 0; i < text.size(); i++) {
-            if (i % 3 == 0) {
-                output += "-1";
-            }
-            int character = text[i];
-            character -= 31; // SPACE = 1
-            Repair(character);
-            std::string c = std::to_string(character);
-            Repair(c);
+        if (c == '\344') { // ñ
+            return 132;
+        }
+        if (c == '\242') { // ó
+            return 133;
+        }
+        if (c == '\230') { // œ
+            return 134;
+        }
+        if (c == '\253') { // Ÿ
+            return 135;
+        }
+        if (c == '\276') { // ¿
+            return 136;
+        }
 
+        if (c < 0 || c > 136) {
+            return '?';
+        }
+        return c;
+    }
+    char ReadCharacter(int character) {
+        if (character == 128) { // ¹
+            return '\245';
+        }
+        if (character == 129) { // æ
+            return '\206';
+        }
+        if (character == 130) { // ê
+            return '\251';
+        }
+        if (character == 131) { // ³
+            return '\210';
+        }
+        if (character == 132) { // ñ
+            return '\344';
+        }
+        if (character == 133) { // ó
+            return '\242';
+        }
+        if (character == 134) { // œ
+            return '\230';
+        }
+        if (character == 135) { // Ÿ
+            return '\253';
+        }
+        if (character == 136) { // ¿
+            return '\276';
+        }
+
+        if (character < 0 || character > 136) {
+            return '?';
+        }
+        return character;
+    }
+    std::string ReadChunk(int number) {
+        std::string output = "";
+        while (number > 0) {
+            int character = number % characterBase;
+            char c = ReadCharacter(character);
             output += c;
+            number /= characterBase;
         }
-        int remainder = text.size() % 3;
-        for (int i = 0; i < remainder; i++) {
-            output += "01"; // SPACE
+        return output;
+    }
+
+    std::string StringToData(std::string text) {
+        // we store data in numbers in base system based on variable base (first character is the smallest)
+        int curOutput = 0;
+        int curPower = 1;
+        std::string output = "-";
+        int i = 0;
+        while (i < text.size()) {
+            int character = Repair(text[i]);
+            curOutput += curPower * character;
+            curPower *= characterBase;
+            i++;
+            if (i % 3 == 0) { // end of chunk
+                output += std::to_string(curOutput);
+                output += '-';
+                curOutput = 0;
+                curPower = 1;
+            }
         }
-        output += "-";
+        if (curOutput > 0) {
+            output += std::to_string(curOutput);
+            output += '-';
+        }
         return output;
     }
     std::string DataToString(std::string data) {
         std::string output = "";
-        for (int i = 0; i < data.size(); i++) {
-            if (data[i] != '-') {
-                std::string piece = "";
-                piece += data[i];
-                piece += data[i + 1];
-                int character = std::stoi(piece);
-                character += 31; // SPACE was equal to 1
-                char c;
-                if (character == 130) {
-                    c = '\n';
-                }
-                else {
-                    c = character;
-                }
-
-                output += c;
+        int i = 0;
+        while (i < data.size()) {
+            if (data[i] == '-') { // a new chunk begins
                 i++;
+                std::string chunk = "";
+                if (i < data.size()) { // if the last '-' wasn't the end of the message
+                    while (data[i] != '-' && i < data.size() - 1) { // until the next chunk starts or the index gets out of range
+                        chunk += data[i];
+                        i++;
+                    }
+                    int number = std::stoi(chunk);
+                    output += ReadChunk(number);
+                }
             }
             else {
-                i++;
+                i++; // ignore unseparated values
             }
         }
         return output;
