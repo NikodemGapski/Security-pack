@@ -8,4 +8,5 @@ private:
 
 public:
 	static bool Run(); // run the process of logging in (returns true when an error occurs)
+	static void LogOut(); // run the process of logging out
 };

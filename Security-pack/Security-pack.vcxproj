@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Message.cpp" />
     <ClCompile Include="src\Register.cpp" />
     <ClCompile Include="src\Hash.cpp" />
     <ClCompile Include="src\sqlite3.c" />
@@ -149,8 +150,10 @@
     <ClCompile Include="src\MainController.cpp" />
     <ClCompile Include="src\Math.cpp" />
     <ClCompile Include="src\Security-pack.cpp" />
+    <ClCompile Include="src\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Message.h" />
     <ClInclude Include="src\Register.h" />
     <ClInclude Include="src\Hash.h" />
     <ClInclude Include="src\DatabaseConnection.h" />
@@ -159,6 +162,7 @@
     <ClInclude Include="src\Login.h" />
     <ClInclude Include="src\MainController.h" />
     <ClInclude Include="src\Math.h" />
+    <ClInclude Include="src\UI.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\packages.config" />
