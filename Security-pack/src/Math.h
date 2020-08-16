@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "INT.h"
 
 namespace Math {
 	int Power(int base, int power);

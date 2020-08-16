@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\INT.cpp" />
     <ClCompile Include="src\Message.cpp" />
     <ClCompile Include="src\Register.cpp" />
     <ClCompile Include="src\Hash.cpp" />
@@ -153,6 +154,7 @@
     <ClCompile Include="src\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\INT.h" />
     <ClInclude Include="src\Message.h" />
     <ClInclude Include="src\Register.h" />
     <ClInclude Include="src\Hash.h" />
