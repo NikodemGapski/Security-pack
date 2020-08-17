@@ -1,4 +1,4 @@
-﻿  INT.cpp
-C:\Users\BiN\source\repos\Security-pack\Security-pack\src\INT.cpp(8,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\BiN\source\repos\Security-pack\Security-pack\src\INT.cpp(67,24): warning C4018: '<': signed/unsigned mismatch
+﻿  Security-pack.cpp
+C:\Users\BiN\source\repos\Security-pack\Security-pack\src\Security-pack.cpp(9,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\BiN\source\repos\Security-pack\Security-pack\src\Security-pack.cpp(12,6): warning C4101: 'B': unreferenced local variable
   Security-pack.vcxproj -> C:\Users\BiN\source\repos\Security-pack\Debug\Security-pack.exe

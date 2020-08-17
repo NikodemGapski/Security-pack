@@ -7,10 +7,9 @@
 int main()
 {
 	srand(time(NULL));
-	INT a("-2835723984784812946");
-	INT b("-1294907542038754238");
-	std::cout << a << ", " << b << std::endl;
-	std::cout << (a >= b);
+	/// conclusion: we have a problem... custom INT is way too SLOOOOOOOOOOOOOOOOOOW
+
+	//std::cout << a.divide(INT(4));
 	//MainController::Run();
 	// example code for RSA
 	/*std::string message = "abc\nabc";
