@@ -9,8 +9,6 @@ Security-pack is an encrypted messenger communicator working on the local machin
 
 The encrypted messages, password hashes and RSA keys are stored in sqlite3 databases ([Database.h](./Security-pack/src/Database.h), [DatabaseConnection.h](./Security-pack/src/DatabaseConnection.h)).
 
-In order to achieve a high level of encryption, a custom large int class is implemented ([INT.h](./Security-pack/src/INT.h)).
-
 ## License
 
 This project is under MIT License.
