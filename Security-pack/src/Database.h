@@ -10,7 +10,8 @@ private:
 	static const char* dirMessages; // messages directory
 public:
 	static DBConnect::User currentUser; // current user's data
-	static int ExistsUser(std::string l, int hash); // returns 1 if a user is found in the database,
+	static int ExistsUser(std::string l, int hash); // sets the currentUser to the found user if one exists
+													// returns 1 if a user is found in the database,
 													//0 if the password is wrong and -1 if the login is wrong
 	static bool ExistsKey(); // returns true if a private key of the current user exists and false if not
 	static bool ExistsReceiver(std::string l); // returns true if a user with given login exists in users.db
