@@ -1,6 +1,6 @@
 # Security-pack
 
-Security-pack is an encrypted messenger communicator working on the local machine. It features mainly:
+Security-pack is an encrypted messaging communicator working on the local machine. It features mainly:
 
 - creating new accounts with RSA keys,
 - a login system (only the hashes of passwords are stored),
